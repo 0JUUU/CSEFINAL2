@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/colorPaleGoldenrod">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingTop="18dp"
+                android:paddingLeft="30dp"
+                android:text="카메라 안내"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                />
+        </LinearLayout>
+
+        /* 카메라 설명 내용*/
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="560dp">
+
+        <TextView
+            android:id="@+id/textView_info_camera_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="A. 신호등의 색과 남은 시간, 횡단 보도의 거리를 안내해드립니다.\n\n
+B. 신호등이 인식되면, 인식 완료 안내 후 정보가 안내됩니다.\n\n
+C. 시간이 안내된 후부터 카운트가 시작됩니다.\n\n
+D. 안내된 시간에 1~2초 정도의 오차가 있을 수 있으니 주의하시기 바랍니다."
+            android:textColor="#000000"
+            android:lineSpacingExtra="5dp"
+            >
+
+        </TextView>
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:background="@color/colorPaleGoldenrod">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:src="@drawable/ic_info_outline_black_24dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="30dp"/>
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:textSize="20sp"
+                    android:text="도움말"
+                    android:textColor="#000000"/>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:src="@drawable/ic_map_gray_24dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="30dp"/>
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:textSize="20sp"
+                    android:text="지도"
+                    android:textColor="@color/colorDarkGray"/>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:src="@drawable/ic_camera_alt_gray_24dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="30dp"/>
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:textSize="20sp"
+                    android:text="카메라"
+                    android:textColor="@color/colorDarkGray"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

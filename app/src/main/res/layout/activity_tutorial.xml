@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/colorPaleGoldenrod">
+
+            <TextView
+                android:id="@+id/textView_app_manual_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="     어플리케이션 조작법"
+                android:paddingTop="18dp"
+                android:paddingLeft="30dp"
+                android:paddingBottom="10dp"
+                android:textStyle="bold"
+                android:layout_gravity="left"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="30sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView_app_manual_contents"
+            android:layout_width="wrap_content"
+            android:layout_height="560dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:lineSpacingExtra="5dp"
+            android:text="\nA. 화면 전환은 양 옆으로 넘겨서 할 수 있습니다. 실행 첫 화면에서 오른쪽으로 넘기면 도움말 화면이 나옵니다.\n\n
+B. 화면을 한 번 누르면, 설명 음성이 나옵니다. 선택하기 위해서는 두번 누르면 됩니댜.\n\n
+C. 초기 화면은 지도입니다. 안전한 경로를 안내하기 위한 화면입니다.\n\n
+D. 오른쪽으로 넘기면 나오는 카메라 화면은, 신호등의 색과 남은 시간을 알려주는 화면입니다.\n\n
+E. 왼쪽으로 넘기면 도움말 화면입니다.\n\n
+F. 팝업창을 닫기 위해서는 화면을 두 번 눌러주세요."
+            android:textColor="#000000"
+            android:textSize="17sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:background="@color/colorPaleGoldenrod">
+
+            <LinearLayout
+                android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:src="@drawable/ic_info_outline_black_24dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="30dp"/>
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:text="도움말"
+                android:textColor="#000000"/>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:src="@drawable/ic_map_gray_24dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="30dp"/>
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:text="지도"
+                android:textColor="@color/colorDarkGray"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:src="@drawable/ic_camera_alt_gray_24dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="30dp"/>
+
+                <TextView
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:text="카메라"
+                android:textColor="@color/colorDarkGray"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
