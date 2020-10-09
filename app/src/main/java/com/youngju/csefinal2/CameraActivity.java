@@ -34,6 +34,7 @@ public class CameraActivity extends AppCompatActivity
 
     private CameraBridgeViewBase mOpenCvCameraView;
 
+    //public native void ConvertRGBtoGray(long matAddrInput, long matAddrResult);
 
 
     static {
