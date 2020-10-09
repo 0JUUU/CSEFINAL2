@@ -51,9 +51,9 @@ public class MainActivity extends AppCompatActivity{
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return MapActivity.newInstance();
-                case 1:
                     return HelpActivity.newInstance();
+                case 1:
+                    return MapActivity.newInstance();
                 default:
                     return null;
             }
