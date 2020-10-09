@@ -34,7 +34,7 @@ public class CameraActivity extends AppCompatActivity
 
     private CameraBridgeViewBase mOpenCvCameraView;
 
-    public native void ConvertRGBtoGray(long matAddrInput, long matAddrResult);
+    //public native void ConvertRGBtoGray(long matAddrInput, long matAddrResult);
 
 
     static {
@@ -70,7 +70,7 @@ public class CameraActivity extends AppCompatActivity
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_camera);
 
         mOpenCvCameraView = (CameraBridgeViewBase)findViewById(R.id.activity_surface_view);
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
@@ -128,8 +128,8 @@ public class CameraActivity extends AppCompatActivity
 //            matResult = new Mat(matInput.rows(), matInput.cols(), matInput.type());
 //
 //        ConvertRGBtoGray(matInput.getNativeObjAddr(), matResult.getNativeObjAddr());
+//
 
-        //
         return matInput;
     }
 
