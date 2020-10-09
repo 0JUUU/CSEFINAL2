@@ -31,7 +31,7 @@
         <TextView
             android:id="@+id/textView_app_manual_contents"
             android:layout_width="wrap_content"
-            android:layout_height="560dp"
+            android:layout_height="500dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:lineSpacingExtra="5dp"

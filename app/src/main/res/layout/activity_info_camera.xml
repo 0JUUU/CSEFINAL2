@@ -25,7 +25,7 @@
         /* 카메라 설명 내용*/
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="560dp">
+        android:layout_height="500dp">
 
         <TextView
             android:id="@+id/textView_info_camera_content"

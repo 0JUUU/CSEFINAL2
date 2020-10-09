@@ -27,7 +27,7 @@
         <LinearLayout
             android:id="@+id/LinearLayout_tutorial_simple"
             android:layout_width="match_parent"
-            android:layout_height="280dp"
+            android:layout_height="240dp"
             android:orientation="vertical">
 
             <TextView
@@ -57,7 +57,7 @@
         <LinearLayout
             android:id="@+id/LinearLayout_info_func_simple"
             android:layout_width="match_parent"
-            android:layout_height="280dp"
+            android:layout_height="240dp"
             android:orientation="vertical">
 
             <TextView

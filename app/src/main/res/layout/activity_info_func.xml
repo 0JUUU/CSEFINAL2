@@ -28,7 +28,7 @@
         <LinearLayout
             android:id="@+id/LinearLayout_info_map_simple"
             android:layout_width="match_parent"
-            android:layout_height="280dp"
+            android:layout_height="240dp"
             android:orientation="vertical">
 
             <TextView
@@ -48,7 +48,7 @@
         <LinearLayout
             android:id="@+id/LinearLayout_info_camera_simple"
             android:layout_width="match_parent"
-            android:layout_height="280dp"
+            android:layout_height="240dp"
             android:orientation="vertical">
 
             <TextView
