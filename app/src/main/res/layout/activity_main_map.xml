@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".CameraActivity"
-    android:orientation="vertical">
 
-    <LinearLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".CameraActivity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/name_map"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@color/colorPaleGoldenrod">
+        android:background="@color/colorPaleGoldenrod"
+        android:layout_alignParentTop="true">
 
 
         <TextView
@@ -22,25 +23,30 @@
             android:text="지도"
             android:textColor="#000000"
             android:textSize="30sp"
-
             />
 
-
-    </LinearLayout>
-
-
+    </RelativeLayout>
 
     <SearchView
+        android:id="@+id/srch"
+        android:layout_below="@id/name_map"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="50dp"/>
 
-
-   
+    <RelativeLayout
+        android:id="@+id/Map"
+        android:layout_below="@+id/srch"
+        android:layout_above="@+id/down_map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/down_map"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="100dp"
         android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
         android:weightSum="3"
         android:background="@color/colorPaleGoldenrod">
 
@@ -69,8 +75,6 @@
                 android:textSize="20sp"
                 android:text="도움말"
                 android:textColor="@color/colorDarkGray"/>
-
-
         </LinearLayout>
 
 
@@ -98,9 +102,6 @@
                 android:textSize="20sp"
                 android:text="지도"
                 android:textColor="#000000"/>
-
-
-
         </LinearLayout>
 
         <LinearLayout
@@ -127,21 +128,7 @@
                 android:textSize="20sp"
                 android:text="카메라"
                 android:textColor="@color/colorDarkGray"/>
-
         </LinearLayout>
-
     </LinearLayout>
 
-
-
-
-
-
-
-
-
-
-
-
-
-</LinearLayout>
+</RelativeLayout>
