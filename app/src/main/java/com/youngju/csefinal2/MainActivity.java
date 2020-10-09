@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        myRef.setValue("Hello, World!");
 
         RelativeLayout tmap = (RelativeLayout) findViewById(R.id.Map);
         tMapView = new TMapView(this);
