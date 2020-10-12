@@ -41,13 +41,13 @@
     <RelativeLayout
         android:id="@+id/Map"
         android:layout_below="@+id/srch"
-        android:layout_above="@+id/down_map"
+        android:layout_above="@+id/map_down_map"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/down_map"
+        android:id="@+id/map_down_map"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:orientation="horizontal"

@@ -2,14 +2,16 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/camera_up_name"
             android:layout_width="match_parent"
             android:layout_height="80dp"
+            android:layout_alignParentTop="true"
             android:background="@color/colorPaleGoldenrod">
             <TextView
                 android:layout_width="wrap_content"
@@ -20,12 +22,14 @@
                 android:textColor="#000000"
                 android:textSize="30sp"
                 />
-        </LinearLayout>
+        </RelativeLayout>
 
         /* 카메라 설명 내용*/
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/camera_up_name"
+        android:layout_above="@+id/camera_down_bar">
 
         <TextView
             android:id="@+id/textView_info_camera_content"
@@ -44,11 +48,13 @@ D. 안내된 시간에 1~2초 정도의 오차가 있을 수 있으니 주의하
             >
 
         </TextView>
-    </LinearLayout>
+    </RelativeLayout>
         <LinearLayout
+            android:id="@+id/camera_down_bar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="100dp"
             android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
             android:weightSum="3"
             android:background="@color/colorPaleGoldenrod">
 
@@ -59,7 +65,8 @@ D. 안내된 시간에 1~2초 정도의 오차가 있을 수 있으니 주의하
                 android:orientation="vertical">
 
                 <ImageView
-                    android:src="@drawable/ic_info_outline_black_24dp"
+                    android:src="@drawable/ic_info_outline_gray_24dp"
+
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="10dp"
@@ -75,9 +82,7 @@ D. 안내된 시간에 1~2초 정도의 오차가 있을 수 있으니 주의하
                     android:gravity="center"
                     android:textSize="20sp"
                     android:text="도움말"
-                    android:textColor="#000000"/>
-
-
+                    android:textColor="@color/colorDarkGray"/>
             </LinearLayout>
 
 
@@ -88,7 +93,7 @@ D. 안내된 시간에 1~2초 정도의 오차가 있을 수 있으니 주의하
                 android:orientation="vertical">
 
                 <ImageView
-                    android:src="@drawable/ic_map_gray_24dp"
+                    android:src="@drawable/ic_map_black_24dp"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="10dp"
@@ -104,10 +109,7 @@ D. 안내된 시간에 1~2초 정도의 오차가 있을 수 있으니 주의하
                     android:gravity="center"
                     android:textSize="20sp"
                     android:text="지도"
-                    android:textColor="@color/colorDarkGray"/>
-
-
-
+                    android:textColor="#000000"/>
             </LinearLayout>
 
             <LinearLayout
@@ -134,10 +136,9 @@ D. 안내된 시간에 1~2초 정도의 오차가 있을 수 있으니 주의하
                     android:textSize="20sp"
                     android:text="카메라"
                     android:textColor="@color/colorDarkGray"/>
-
             </LinearLayout>
-
         </LinearLayout>
 
-    </LinearLayout>
+
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

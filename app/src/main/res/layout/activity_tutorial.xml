@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
-        <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@color/colorPaleGoldenrod">
+        <RelativeLayout
+            android:id="@+id/textView_app_manual_title"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_alignParentTop="true"
+            android:background="@color/colorPaleGoldenrod">
 
             <TextView
-                android:id="@+id/textView_app_manual_title"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="     어플리케이션 조작법"
@@ -26,35 +23,45 @@
                 android:gravity="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textSize="30sp" />
-        </LinearLayout>
+        </RelativeLayout>
 
-        <TextView
+        <RelativeLayout
             android:id="@+id/textView_app_manual_contents"
-            android:layout_width="wrap_content"
-            android:layout_height="500dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:lineSpacingExtra="5dp"
-            android:text="\nA. 화면 전환은 양 옆으로 넘겨서 할 수 있습니다. 실행 첫 화면에서 오른쪽으로 넘기면 도움말 화면이 나옵니다.\n\n
-B. 화면을 한 번 누르면, 설명 음성이 나옵니다. 선택하기 위해서는 두번 누르면 됩니댜.\n\n
-C. 초기 화면은 지도입니다. 안전한 경로를 안내하기 위한 화면입니다.\n\n
-D. 오른쪽으로 넘기면 나오는 카메라 화면은, 신호등의 색과 남은 시간을 알려주는 화면입니다.\n\n
-E. 왼쪽으로 넘기면 도움말 화면입니다.\n\n
-F. 팝업창을 닫기 위해서는 화면을 두 번 눌러주세요."
-            android:textColor="#000000"
-            android:textSize="17sp" />
-        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@+id/textView_app_manual_title"
+            android:layout_above="@+id/tutorial_down_bar">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="500dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:lineSpacingExtra="5dp"
+                android:text="\nA. 화면 전환은 양 옆으로 넘겨서 할 수 있습니다. 실행 첫 화면에서 오른쪽으로 넘기면 도움말 화면이 나옵니다.\n\n
+    B. 화면을 한 번 누르면, 설명 음성이 나옵니다. 선택하기 위해서는 두번 누르면 됩니댜.\n\n
+    C. 초기 화면은 지도입니다. 안전한 경로를 안내하기 위한 화면입니다.\n\n
+    D. 오른쪽으로 넘기면 나오는 카메라 화면은, 신호등의 색과 남은 시간을 알려주는 화면입니다.\n\n
+    E. 왼쪽으로 넘기면 도움말 화면입니다.\n\n
+    F. 팝업창을 닫기 위해서는 화면을 두 번 눌러주세요."
+                android:textColor="#000000"
+                android:textSize="17sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/tutorial_down_bar"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
             android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
             android:weightSum="3"
+
             android:background="@color/colorPaleGoldenrod">
 
             <LinearLayout
                 android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
             <ImageView
                 android:src="@drawable/ic_info_outline_black_24dp"
@@ -132,5 +139,5 @@ F. 팝업창을 닫기 위해서는 화면을 두 번 눌러주세요."
 
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>
