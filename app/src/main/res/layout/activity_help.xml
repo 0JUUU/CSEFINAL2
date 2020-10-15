@@ -35,7 +35,8 @@ android:orientation="vertical">
     android:layout_below="@+id/Relative_help"
     android:layout_width="match_parent"
     android:layout_height="280dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:clickable="true">
 
     <TextView
         android:id="@+id/textView_tutorial_simple"
@@ -69,7 +70,8 @@ android:orientation="vertical">
     android:layout_width="match_parent"
     android:layout_alignParentBottom="true"
     android:layout_height="240dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:clickable="true">
 
     <TextView
         android:id="@+id/textView_info_func_simple"

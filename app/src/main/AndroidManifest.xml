@@ -27,7 +27,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAkJy5ahoo_6IZM0pIjjHF2VLIS-LaypRI">
+            android:value="AAIzaSyD5fZxZH9h_FXHbfFk4MwaiOf5wUL0flSs">
         </meta-data>
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -36,6 +36,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".TutorialActivity"></activity>
     </application>
 
 </manifest>
