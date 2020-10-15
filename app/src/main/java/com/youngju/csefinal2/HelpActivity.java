@@ -58,6 +58,7 @@ public class HelpActivity extends Fragment {
                 }
                 if(System.currentTimeMillis()<=btnPressTime+1000){
                     Intent it = new Intent(getActivity(),FuncActivity.class);
+
                     startActivity(it);
                 }
             }
