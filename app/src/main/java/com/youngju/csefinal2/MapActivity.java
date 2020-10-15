@@ -285,8 +285,6 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Activit
         }
     }
 
-
-
     private void setDefaultLocation() {
         LatLng DEFAULT_LOCATION = new LatLng(37.450604, 126.657202);
         String markerTitle = "위치정보 가져올 수 없음";
