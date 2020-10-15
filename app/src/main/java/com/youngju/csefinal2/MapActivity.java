@@ -1,6 +1,5 @@
 package com.youngju.csefinal2;
 
-
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -19,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -49,11 +49,14 @@ import java.util.List;
 import java.util.Locale;
 
 import static android.content.Context.LOCATION_SERVICE;
-import static androidx.core.content.ContextCompat.getSystemService;
 
 public class MapActivity extends Fragment implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
     private  GoogleMap mMap;
     private Marker currentMarker=null;
+
+    Intent intent;
+    TextView textView;
+    Context mContext;
 
     private static final String TAG = "googlemap_example";
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
@@ -79,12 +82,28 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Activit
         return mfrag;
     }
 
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_main_map, container,false);
 
         getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         mLayout = v.findViewById(R.id.layout_map);
+
+        /*TTS*/
+        textView = (TextView)v.findViewById(R.id.srch);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),SearchActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         locationRequest = new LocationRequest().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                 .setInterval(UPDATE_INTERVAL_MS)
