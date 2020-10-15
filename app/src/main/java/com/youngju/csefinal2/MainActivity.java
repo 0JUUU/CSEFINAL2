@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity{
         ViewPager vpPager = (ViewPager)findViewById(R.id.vpPager);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
+
+        vpPager.setCurrentItem(1);
     }
 
 
