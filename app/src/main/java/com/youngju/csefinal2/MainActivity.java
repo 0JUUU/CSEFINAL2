@@ -23,7 +23,6 @@ import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.skt.Tmap.TMapView;
 
 public class MainActivity extends AppCompatActivity{
     FragmentPagerAdapter adapterViewPager;
