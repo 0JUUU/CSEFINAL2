@@ -2,7 +2,7 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:tools="http://schemas.android.com/tools"
-tools:context=".CameraActivity"
+tools:context=".FuncActivity"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical">
@@ -29,20 +29,25 @@ android:orientation="vertical">
 
 
     /* 기능안내 */
+<LinearLayout
+    android:layout_below="@+id/Relative_info_func"
+    android:layout_above="@+id/down_bar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="2"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/RelativeLayout_info_map_simple"
-        android:layout_below="@+id/Relative_info_func"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:layout_gravity="center"
-            android:padding="100dp"
+            android:gravity="center"
 
             android:text="지도"
             android:textColor="#000000"
@@ -53,28 +58,24 @@ android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/RelativeLayout_info_camera_simple"
-        android:layout_below="@id/RelativeLayout_info_map_simple"
         android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_height="240dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:layout_gravity="center"
-            android:padding="100dp"
-
+            android:gravity="center"
             android:text="카메라"
             android:textColor="#000000"
             android:textSize="40sp"
             android:textStyle="bold" />
-
     </RelativeLayout>
+</LinearLayout>
 
     <LinearLayout
-        android:id="@+id/down_map"
+        android:id="@+id/down_bar"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:orientation="horizontal"
