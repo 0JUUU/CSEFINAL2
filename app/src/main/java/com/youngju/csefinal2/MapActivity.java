@@ -120,22 +120,7 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Activit
             @Override
             public void onClick(View v)
                 {
-                    if ( Build.VERSION.SDK_INT >= 23 ){
-                        // 퍼미션 체크
-                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.INTERNET,
-                                Manifest.permission.RECORD_AUDIO},PERMISSION);
-                    }
-
-                    //intent = getIntent();
-
-
-                    intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-                    intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getActivity().getPackageName());
-                    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ko-KR");
-
-
-
-
+                    /*
                     text = "목적지를 말씀해주세요.";
                     Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
 
@@ -144,11 +129,9 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Activit
                         ttsGreater21(text);
                     } else {
                         ttsUnder20(text);
-                    }
+                    }*/
 
-                    mRecognizer = SpeechRecognizer.createSpeechRecognizer(getActivity());
-                    mRecognizer.setRecognitionListener(listener);
-                    mRecognizer.startListening(intent);
+                    speechToText();
             }
         });
 
@@ -166,6 +149,13 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Activit
                 .findFragmentById(R.id.Map);
         mapFragment.getMapAsync(this);
         return v;
+    }
+
+    public void stop() {
+        if(tts !=null){
+            tts.stop();
+            tts.shutdown();
+        }
     }
 
     @Override
@@ -194,6 +184,23 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Activit
     }
 
     // STT
+    private void speechToText()
+    {
+        if ( Build.VERSION.SDK_INT >= 23 ){
+            // 퍼미션 체크
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.INTERNET,
+                    Manifest.permission.RECORD_AUDIO},PERMISSION);
+        }
+        //intent = getIntent();
+
+        intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getActivity().getPackageName());
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ko-KR");
+
+        mRecognizer = SpeechRecognizer.createSpeechRecognizer(getActivity());
+        mRecognizer.setRecognitionListener(listener);
+        mRecognizer.startListening(intent);
+    }
     private RecognitionListener listener = new RecognitionListener() {
         @Override
         public void onReadyForSpeech(Bundle params) {
@@ -262,14 +269,14 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Activit
                 textView.setText(matches.get(i));
             }
 
-            text = textView.getText().toString();
-            Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
+            String text1 = textView.getText().toString();
+            Toast.makeText(getContext(), text1, Toast.LENGTH_SHORT).show();
 
             //http://stackoverflow.com/a/29777304
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                ttsGreater21(text);
+                ttsGreater21(text1);
             } else {
-                ttsUnder20(text);
+                ttsUnder20(text1);
             }
         }
 

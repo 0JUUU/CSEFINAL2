@@ -1,6 +1,5 @@
 package com.youngju.csefinal2;
 
-import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,12 +34,6 @@ public class SearchActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_map);
-        if ( Build.VERSION.SDK_INT >= 23 ){
-            // 퍼미션 체크
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.INTERNET,
-                    Manifest.permission.RECORD_AUDIO},PERMISSION);
-        }
-
         intent = getIntent();
 
 
@@ -65,6 +57,7 @@ public class SearchActivity extends AppCompatActivity {
         String text = "목적지를 말씀해주세요.";
         Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
 
+        tts.setSpeechRate(1.0f);
         //http://stackoverflow.com/a/29777304
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             ttsGreater21(text);
