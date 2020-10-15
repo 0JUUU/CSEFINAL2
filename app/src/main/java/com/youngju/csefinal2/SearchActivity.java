@@ -65,7 +65,6 @@ public class SearchActivity extends AppCompatActivity {
         String text = "목적지를 말씀해주세요.";
         Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
 
-        tts.setSpeechRate(1.0f);
         //http://stackoverflow.com/a/29777304
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             ttsGreater21(text);

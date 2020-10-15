@@ -36,7 +36,6 @@ public class HelpActivity extends Fragment {
             }
         });
 
-       relativehelp.setOnClickListener();
         return view;
     }
 }
