@@ -45,7 +45,7 @@ android:layout_height="wrap_content">
         android:layout_height="1dp" />
 
     <!-- 닫기 버튼 -->
-    <LinearLayout
+   <!-- <LinearLayout
         android:orientation="horizontal"
         android:gravity="center"
         android:layout_width="match_parent"
@@ -60,6 +60,6 @@ android:layout_height="wrap_content">
             android:layout_width="match_parent"
             android:layout_height="53dp"
             android:onClick="mOnClose"/>
-    </LinearLayout>
+    </LinearLayout>-->
 <!--// 닫기 버튼 -->
 </LinearLayout>

@@ -1,7 +1,6 @@
 package com.youngju.csefinal2;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -52,10 +51,10 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.LOCATION_SERVICE;
 
@@ -162,20 +161,6 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Activit
         }
     }
 
-
-    // TTS 관련
-    @SuppressWarnings("deprecation")
-    private void ttsUnder20(String text) {
-        HashMap<String, String> map = new HashMap<>();
-        map.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "MessageId");
-        tts.speak(text, TextToSpeech.QUEUE_FLUSH, map);
-    }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private void ttsGreater21(String text) {
-        String utteranceId=this.hashCode() + "";
-        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, utteranceId);
-    }
 
     // STT
     private void speechToText()
@@ -528,14 +513,15 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Activit
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-
         switch (requestCode) {
             case 1:
                 if(resultCode == RESULT_OK)
                 {
                     String result = data.getStringExtra("result");
                     textView.setText(result);
+                }
+                else if(resultCode == RESULT_CANCELED) {
+                    textView.setText("목적지 입력");
                 }
             case GPS_ENABLE_REQUEST_CODE:
                 if (checkLocationServicesStatus()) {
