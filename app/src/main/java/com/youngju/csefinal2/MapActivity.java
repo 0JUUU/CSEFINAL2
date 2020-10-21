@@ -56,6 +56,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import static android.app.Activity.RESULT_OK;
 import static android.content.Context.LOCATION_SERVICE;
 
 public class MapActivity extends Fragment implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
@@ -64,6 +65,7 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Activit
 
     Intent intent;
     TextView textView;
+    TextView txtResult;
     Context mContext;
     SpeechRecognizer mRecognizer;
     final int PERMISSION = 1;
@@ -108,14 +110,6 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Activit
 
         // TTS
         textView = (TextView)v.findViewById(R.id.srch);
-        tts = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if (status != TextToSpeech.ERROR) {
-                    tts.setLanguage(Locale.KOREAN);
-                }
-            }
-        });
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -201,6 +195,7 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Activit
         mRecognizer.setRecognitionListener(listener);
         mRecognizer.startListening(intent);
     }
+
     private RecognitionListener listener = new RecognitionListener() {
         @Override
         public void onReadyForSpeech(Bundle params) {
@@ -270,14 +265,15 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Activit
             }
 
             String text1 = textView.getText().toString();
-            Toast.makeText(getContext(), text1, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(), PopupCheckDestActivity.class);
+            intent.putExtra("data", text1);
+            startActivityForResult(intent, 1);
+
+
+            // Toast.makeText(getContext(), text1, Toast.LENGTH_SHORT).show();
 
             //http://stackoverflow.com/a/29777304
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                ttsGreater21(text1);
-            } else {
-                ttsUnder20(text1);
-            }
+
         }
 
         @Override
@@ -533,7 +529,14 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Activit
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+
         switch (requestCode) {
+            case 1:
+                if(resultCode == RESULT_OK)
+                {
+                    String result = data.getStringExtra("result");
+                    textView.setText(result);
+                }
             case GPS_ENABLE_REQUEST_CODE:
                 if (checkLocationServicesStatus()) {
                     if (checkLocationServicesStatus()) {
