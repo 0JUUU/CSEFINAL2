@@ -22,7 +22,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -103,7 +102,7 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Activit
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_main_map, container,false);
 
-            PopupActivity popupActivity = new PopupActivity(getActivity());
+        PopupActivity popupActivity = new PopupActivity(getActivity());
         popupActivity.callFunction();
 
         mLayout = v.findViewById(R.id.layout_map);

@@ -38,7 +38,7 @@ public class TutorialActivity extends Activity {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // editText에 있는 문장을 읽는다.
+
                 tts.setSpeechRate(0.9f);
                 tts.speak(textView.getText().toString(),TextToSpeech.QUEUE_FLUSH, null,null);
             }

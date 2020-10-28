@@ -44,6 +44,9 @@
         <activity android:name=".FuncActivity"></activity>
         <activity android:name=".CameraInfoActivity"></activity>
         <activity android:name=".MapInfoActivity"></activity>
+        <activity android:name=".PopupCheckDestActivity" android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".PopupActivity" android:theme="@android:style/Theme.Dialog"/>
+
     </application>
 
 </manifest>
