@@ -26,12 +26,12 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/textView_app_manual_contents"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/textView_app_manual_title"
             android:layout_above="@+id/tutorial_down_bar">
             <TextView
+                android:id="@+id/textView_app_manual_contents"
                 android:layout_width="wrap_content"
                 android:layout_height="500dp"
                 android:layout_marginLeft="10dp"
@@ -39,7 +39,8 @@
                 android:lineSpacingExtra="5dp"
                 android:text="\nA. 화면 전환은 양 옆으로 넘겨서 할 수 있습니다. 실행 첫 화면에서 오른쪽으로 넘기면 도움말 화면이 나옵니다.\n\nB. 화면을 한 번 누르면, 설명 음성이 나옵니다. 선택하기 위해서는 두번 누르면 됩니댜.\n\nC. 초기 화면은 지도입니다. 안전한 경로를 안내하기 위한 화면입니다.\n\nD. 오른쪽으로 넘기면 나오는 카메라 화면은, 신호등의 색과 남은 시간을 알려주는 화면입니다.\n\nE. 왼쪽으로 넘기면 도움말 화면입니다.\n\nF. 팝업창을 닫기 위해서는 화면을 두 번 눌러주세요."
                 android:textColor="#000000"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                android:clickable="true"/>
         </RelativeLayout>
 
         <LinearLayout

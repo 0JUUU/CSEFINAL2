@@ -40,6 +40,7 @@ public class PopupCheckDestActivity extends Activity {
                     String s = data.concat(" 맞습니까? 맞으면 핸드폰 백버튼을 누르시고, 아니면 화면을 터치해주세요.");
                     tts.setLanguage(Locale.KOREAN);
                     tts.setSpeechRate(0.9f);
+
                     //http://stackoverflow.com/a/29777304
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
                         tts.speak(s, TextToSpeech.QUEUE_FLUSH, null, null);
