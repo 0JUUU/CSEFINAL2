@@ -58,7 +58,7 @@ import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.LOCATION_SERVICE;
 
-public class MapActivity extends Fragment implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
+public class MapActivity extends Fragment implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback{
     private  GoogleMap mMap;
     private Marker currentMarker=null;
 
@@ -103,7 +103,8 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Activit
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_main_map, container,false);
 
-        getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            PopupActivity popupActivity = new PopupActivity(getActivity());
+        popupActivity.callFunction();
 
         mLayout = v.findViewById(R.id.layout_map);
 
@@ -536,4 +537,5 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Activit
                 break;
         }
     }
+
 }

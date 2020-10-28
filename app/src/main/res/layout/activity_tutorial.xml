@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tutorial"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
         <RelativeLayout
             android:id="@+id/textView_app_manual_title"
             android:layout_width="match_parent"
@@ -134,5 +134,4 @@
 
             </LinearLayout>
         </LinearLayout>
-
 </RelativeLayout>

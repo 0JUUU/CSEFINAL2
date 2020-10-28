@@ -16,12 +16,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.HashMap;
 import java.util.Locale;
 
 public class HelpActivity extends Fragment {
-
     TextView textView;
     TextView textView1;
     Context mContext;
@@ -34,13 +34,14 @@ public class HelpActivity extends Fragment {
     RelativeLayout relativetutorial;
 
     public static HelpActivity newInstance(){
-        HelpActivity helpfr=new HelpActivity();
+        HelpActivity helpfr = new HelpActivity();
         return helpfr;
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_help, container, false);
+        View view = inflater.inflate(R.layout.activity_help, null);
+
         relativehelp = (RelativeLayout) view.findViewById(R.id.RelativeLayout_info_func_simple);
         relativetutorial = (RelativeLayout) view.findViewById(R.id.RelativeLayout_tutorial_simple);
         textView = (TextView)view.findViewById(R.id.textView_tutorial_simple);
@@ -57,7 +58,6 @@ public class HelpActivity extends Fragment {
             @Override
             public void onClick(View v) {
 
-
                 if(System.currentTimeMillis()>btnPressTime+1000){
                     btnPressTime = System.currentTimeMillis();
                     String text1 = textView.getText().toString();
@@ -72,8 +72,9 @@ public class HelpActivity extends Fragment {
                     return;
                 }
                 if(System.currentTimeMillis()<=btnPressTime+1000){
-                    Intent it = new Intent(getActivity(),TutorialActivity.class);
-                    startActivity(it);
+                    //((MainActivity)getActivity()).replaceFragment(TutorialActivity.newInstance());
+                    Intent intent = new Intent(getActivity(),TutorialActivity.class);
+                    startActivity(intent);
                 }
             }
         });
@@ -95,7 +96,7 @@ public class HelpActivity extends Fragment {
                     }
                     return;
                 }
-                if(System.currentTimeMillis()<=btnPressTime+1000){
+                    if(System.currentTimeMillis()<=btnPressTime+1000){
                     Intent it = new Intent(getActivity(),FuncActivity.class);
 
                     startActivity(it);

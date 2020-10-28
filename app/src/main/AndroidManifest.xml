@@ -42,8 +42,8 @@
         <activity android:name=".TutorialActivity"></activity>
         <activity android:name=".SearchActivity"></activity>
         <activity android:name=".FuncActivity"></activity>
-        <activity android:name=".PopupCheckDestActivity" android:theme="@android:style/Theme.Dialog"></activity>
-
+        <activity android:name=".CameraInfoActivity"></activity>
+        <activity android:name=".MapInfoActivity"></activity>
     </application>
 
 </manifest>
