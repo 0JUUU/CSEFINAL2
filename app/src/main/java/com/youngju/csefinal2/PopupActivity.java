@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 public class PopupActivity extends Activity {
 
     private  Context context;
@@ -28,22 +30,41 @@ public class PopupActivity extends Activity {
         dig.show();
 
         LinearLayout layout = (LinearLayout)dig.findViewById(R.id.pop_up_txt);
-
+        textView = (TextView)dig.findViewById(R.id.textView_pop_up);
         layout.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
                 if(System.currentTimeMillis()>btnPressTime+1000){
                     btnPressTime = System.currentTimeMillis();
+                    tts = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
+                        @Override
+                        public void onInit(int status) {
+                            if (status != TextToSpeech.ERROR) {
+                                tts.setLanguage(Locale.KOREAN);
+                                tts.setSpeechRate(0.9f);
+                                tts.speak(textView.getText().toString(), TextToSpeech.QUEUE_FLUSH, null, null);
+                            }
+                        }
+                    });
 
                     return;
                 }
                 if(System.currentTimeMillis()<=btnPressTime+1000){
-                   dig.dismiss();
+                    tts.stop();
+                    dig.dismiss();
                 }
             }
         });
     }
-
+    protected void onDestroy() {
+        super.onDestroy();
+        // TTS 객체가 남아있다면 실행을 중지하고 메모리에서 제거한다.
+        if(tts != null){
+            tts.stop();
+            tts.shutdown();
+            tts = null;
+        }
+    }
 }
 

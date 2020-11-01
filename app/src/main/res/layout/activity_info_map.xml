@@ -41,6 +41,7 @@ android:orientation="vertical">
             android:layout_marginTop="50dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:clickable="true"
             android:text="A. 안전한 경로를 안내해드립니다.\n\nB. 경로를 입력하기 위해서는 화면 상단에 있는 음성안내칸을 두번 터치한 후 도착지점을 또박또박 천천히 말씀해주시기 바랍니다.\n\nC. 말씀하신 도착지가 맞는지 확인 음성이 나옵니다. 맞다면 두번 터치해주시고, 재입력을 원하시면 아래에서 위로 화면을 쓸어 올려주세요.\n\nD. 안내 중 계단이나 잘못된 점자블록 등이 발견되면 경고 알림이 나오니 주의하시기 바랍니다.\n\nE. 신호등 위치에 근접하면 안내 음성이 나옵니다. 횡단보도를 건넌다면 안내를 따라주시기 바랍니다."
             android:textSize="17sp"
             android:textColor="#000000"

@@ -16,7 +16,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -50,6 +49,7 @@ public class HelpActivity extends Fragment {
             public void onInit(int status) {
                 if (status != TextToSpeech.ERROR) {
                     tts.setLanguage(Locale.KOREAN);
+                    tts.setSpeechRate(0.9f);
                 }
             }
         });

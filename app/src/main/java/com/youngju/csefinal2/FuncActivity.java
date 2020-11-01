@@ -46,6 +46,7 @@ public class FuncActivity extends Activity {
             public void onInit(int status) {
                 if (status != TextToSpeech.ERROR) {
                     tts.setLanguage(Locale.KOREAN);
+                    tts.setSpeechRate(0.9f);
                 }
             }
         });
