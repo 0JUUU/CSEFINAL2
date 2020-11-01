@@ -31,27 +31,30 @@ public class PopupActivity extends Activity {
 
         LinearLayout layout = (LinearLayout)dig.findViewById(R.id.pop_up_txt);
         textView = (TextView)dig.findViewById(R.id.textView_pop_up);
+        tts = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != TextToSpeech.ERROR) {
+                    tts.setLanguage(Locale.KOREAN);
+                    tts.setSpeechRate(0.9f);
+                }
+            }
+        });
+
         layout.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
                 if(System.currentTimeMillis()>btnPressTime+1000){
                     btnPressTime = System.currentTimeMillis();
-                    tts = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
-                        @Override
-                        public void onInit(int status) {
-                            if (status != TextToSpeech.ERROR) {
-                                tts.setLanguage(Locale.KOREAN);
-                                tts.setSpeechRate(0.9f);
-                                tts.speak(textView.getText().toString(), TextToSpeech.QUEUE_FLUSH, null, null);
-                            }
-                        }
-                    });
+
+                    tts.speak(textView.getText().toString(), TextToSpeech.QUEUE_FLUSH, null, null);
 
                     return;
                 }
                 if(System.currentTimeMillis()<=btnPressTime+1000){
                     tts.stop();
+                    tts.shutdown();
                     dig.dismiss();
                 }
             }
