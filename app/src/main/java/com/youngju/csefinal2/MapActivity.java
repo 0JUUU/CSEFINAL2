@@ -128,7 +128,6 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Activit
             }
         });
 
-
         locationRequest = new LocationRequest().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                 .setInterval(UPDATE_INTERVAL_MS)
                 .setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
@@ -523,6 +522,7 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Activit
                 else if(resultCode == RESULT_CANCELED) {
                     textView.setText("목적지 입력");
                 }
+
             case GPS_ENABLE_REQUEST_CODE:
                 if (checkLocationServicesStatus()) {
                     if (checkLocationServicesStatus()) {
