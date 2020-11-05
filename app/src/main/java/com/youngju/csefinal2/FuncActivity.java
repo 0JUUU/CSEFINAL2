@@ -22,7 +22,6 @@ public class FuncActivity extends Activity {
     RelativeLayout infocam;
 
     private long btnPressTime = 0;
-
     TextView textView;
     TextView textView1;
     Context mContext;

@@ -25,7 +25,6 @@ public class PopupCheckDestActivity extends Activity {
         setContentView(R.layout.activity_popupcheckdest);
         TTS();
 
-
     }
     public void TTS() {
         txtText = (TextView)findViewById(R.id.txtText);

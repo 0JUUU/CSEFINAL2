@@ -15,7 +15,6 @@ public class MapInfoActivity extends Activity {
     TextToSpeech tts;
 
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

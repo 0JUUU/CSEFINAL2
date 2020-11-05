@@ -253,7 +253,6 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Activit
             intent.putExtra("data", text1);
             startActivityForResult(intent, 1);
 
-
             // Toast.makeText(getContext(), text1, Toast.LENGTH_SHORT).show();
 
             //http://stackoverflow.com/a/29777304

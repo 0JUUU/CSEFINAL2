@@ -33,7 +33,6 @@ public class TutorialActivity extends Activity {
                 }
             }
         });
-
         textView = (TextView)findViewById(R.id.textView_app_manual_contents);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override

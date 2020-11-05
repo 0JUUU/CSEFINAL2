@@ -37,6 +37,7 @@ public class CameraInfoActivity extends Activity {
             }
         });
     }
+
     protected void onDestroy() {
         super.onDestroy();
         // TTS 객체가 남아있다면 실행을 중지하고 메모리에서 제거한다.

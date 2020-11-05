@@ -22,7 +22,6 @@ public class PopupActivity extends Activity {
     TextView textView;
     TextToSpeech tts;
 
-
     public void callFunction(){
         final Dialog dig = new Dialog(context);
         dig.setTitle("튜토리얼");

@@ -28,7 +28,6 @@ public class SearchActivity extends AppCompatActivity {
     Button button;
 
 
-
         @Override
         protected void onCreate(Bundle savedInstanceState) {
 
