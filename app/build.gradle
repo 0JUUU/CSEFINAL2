@@ -39,13 +39,14 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
     implementation project(path: ':sdk')
+    implementation files('libs\\com.skt.Tmap_1.66.jar')
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    implementation platform('com.google.firebase:firebase-bom:25.12.0')
-    implementation 'com.google.firebase:firebase-analytics'
-    implementation 'com.google.firebase:firebase-database:19.5.0'
+    //implementation platform('com.google.firebase:firebase-bom:25.12.0')
+    //implementation 'com.google.firebase:firebase-analytics'
+    //implementation 'com.google.firebase:firebase-database:19.5.0'
     implementation 'me.relex:circleindicator:1.2.2'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.google.android.gms:play-services-location:17.1.0'

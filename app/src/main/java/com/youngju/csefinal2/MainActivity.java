@@ -11,6 +11,22 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.youngju.csefinal2.MapActivity;
+//import com.google.firebase.database.DatabaseReference;
+//import com.google.firebase.database.FirebaseDatabase;
+
 public class MainActivity extends AppCompatActivity{
     FragmentPagerAdapter adapterViewPager;
     public static Context mContext;
@@ -41,14 +57,19 @@ public class MainActivity extends AppCompatActivity{
         @NonNull
         @Override
         public Fragment getItem(int position) {
+            Fragment fragment = null;
             switch (position) {
                 case 0:
-                    return HelpActivity.newInstance();
+                    fragment = HelpActivity.newInstance();
+                    break;
                 case 1:
-                    return MapActivity.newInstance();
+                    fragment = MapActivity.newInstance();
+                    break;
                 default:
-                    return null;
+                    fragment = null;
+                    break;
             }
+            return fragment;
         }
 
         @Override
