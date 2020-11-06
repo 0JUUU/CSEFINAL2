@@ -717,8 +717,7 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
         tMapData = new TMapData();
         arrayPoint = null;
 
-        if(polylineOptions!=null)
-            polylineOptions = null;
+        googleMap.clear();
 
         //출발지 목적지 위도, 경도 설정
         TMapPoint startpoint = new TMapPoint(curLocation.getLatitude(),curLocation.getLongitude());
@@ -737,7 +736,7 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
                         //google map에 경로그리기
                         LatLng startLatlng = new LatLng(curLocation.getLatitude(), curLocation.getLongitude());
                         polylineOptions = new PolylineOptions();
-                        polylineOptions.width(20).color(Color.RED).add(startLatlng);
+                        polylineOptions.width(30).color(Color.RED).add(startLatlng);
 
                         for (int i = 0; i < arrayPoint.size(); ++i) {
                             TMapPoint tMapPoint = arrayPoint.get(i);

@@ -6,4 +6,6 @@
     <color name="colorDarkGray">#A9A9A9</color>
     <color name="colorPaleGoldenrod">#EEE8AA</color>
     <color name="colorKhaki">#F0E68C</color>
+    <color name="colorOrange">#ff7a00</color>
+    <color name="colorWhite">#ffff</color>
 </resources>

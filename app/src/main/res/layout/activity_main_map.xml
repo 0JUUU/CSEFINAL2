@@ -11,7 +11,14 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vpPager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
+
+        <ListView
+            android:id="@+id/searchResultList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible" />
+    </androidx.viewpager.widget.ViewPager>
 
     <RelativeLayout
         android:id="@+id/name_map"
@@ -48,14 +55,18 @@
             android:clickable="true"
             android:gravity="center|left"
             android:background="@drawable/textview_layout"
-            android:layout_weight="0.5"/>
+            android:layout_weight="0.5"
+            android:textStyle="bold"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_weight="0.5"
             android:text="검색"
             android:clickable="true"
-            android:id="@+id/srch_btn"/>
+            android:id="@+id/srch_btn"
+            android:background="@color/colorOrange"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"/>
     </LinearLayout>
 
     <FrameLayout
@@ -69,11 +80,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:name="com.google.android.gms.maps.SupportMapFragment"/>
-        <ListView
-            android:id="@+id/searchResultList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="invisible"/>
 
     </FrameLayout>
 
