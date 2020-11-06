@@ -2,7 +2,6 @@ package com.youngju.csefinal2;
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -19,8 +18,6 @@ import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.speech.tts.TextToSpeech;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,7 +51,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.snackbar.SnackbarContentLayout;
 import com.skt.Tmap.TMapData;
 import com.skt.Tmap.TMapPOIItem;
 import com.skt.Tmap.TMapPoint;
@@ -62,12 +58,10 @@ import com.skt.Tmap.TMapPolyLine;
 import com.skt.Tmap.TMapTapi;
 
 import java.io.IOException;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import static android.app.Activity.RESULT_CANCELED;
 import static android.content.Context.LOCATION_SERVICE;
 
 
@@ -127,7 +121,7 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
     private boolean startLocation_finish = false;
 
     private Button findPath_btn;
-
+    private long btnPressTime = 0;
 
     public static MapActivity newInstance() {
         MapActivity mfrag = new MapActivity();
@@ -175,12 +169,32 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
         adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, list_data);
         searchResult_listview.setAdapter(adapter);
 
+        // 검색 버튼 한번 : 음성출력 / 두번 : 검색
+        tts = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != TextToSpeech.ERROR) {
+                    tts.setLanguage(Locale.KOREAN);
+                    tts.setSpeechRate(0.9f);
+                }
+            }
+        });
         findPath_btn = (Button)v.findViewById(R.id.srch_btn);
 
         findPath_btn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FindPOI(destination_text);
+
+                if (System.currentTimeMillis() > btnPressTime + 1000) {
+                    btnPressTime = System.currentTimeMillis();
+                    tts.setSpeechRate(0.9f);
+                    tts.speak(findPath_btn.getText().toString(), TextToSpeech.QUEUE_FLUSH, null, null);
+                    return;
+                }
+                if (System.currentTimeMillis() <= btnPressTime + 1000) {
+                    FindPOI(destination_text);
+                }
+
             }
         });
 
