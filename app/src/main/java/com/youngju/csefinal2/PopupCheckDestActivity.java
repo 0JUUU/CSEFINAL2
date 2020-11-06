@@ -82,7 +82,7 @@ public class PopupCheckDestActivity extends Activity {
         if(event.getAction()==MotionEvent.ACTION_DOWN){
             //데이터 전달하기
             Intent intent = new Intent();
-            intent.putExtra("result", "ㄱㄴㄱㄴ");
+            intent.putExtra("result", "목적지 검색");
             setResult(RESULT_CANCELED, intent);
 
             //액티비티(팝업) 닫기
