@@ -56,7 +56,8 @@
             android:gravity="center|left"
             android:background="@drawable/textview_layout"
             android:layout_weight="0.5"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="60dp"
@@ -66,7 +67,7 @@
             android:id="@+id/srch_btn"
             android:background="@color/colorOrange"
             android:textColor="@color/colorWhite"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
     </LinearLayout>
 
     <FrameLayout

@@ -123,6 +123,8 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
     private Button findPath_btn;
     private long btnPressTime = 0;
 
+    private boolean pathok = false;
+
     public static MapActivity newInstance() {
         MapActivity mfrag = new MapActivity();
         return mfrag;
@@ -632,7 +634,7 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("위치 서비스 비활성화");
         builder.setMessage("앱을 사용하기 위해서는 위치서비스가 필요합니다.\n"
-        +"위치 설저을 수정하실래요?");
+        +"위치 설정을 수정하실래요?");
         builder.setCancelable(true);
         builder.setPositiveButton("설정", new DialogInterface.OnClickListener() {
             @Override
@@ -717,13 +719,22 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
         tMapData = new TMapData();
         arrayPoint = null;
 
-        googleMap.clear();
+        if(pathok){
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    googleMap.clear();
+                    pathok = false;
+                }
+            });
+        }
 
+        Log.d(TAG,"what");
         //출발지 목적지 위도, 경도 설정
         TMapPoint startpoint = new TMapPoint(curLocation.getLatitude(),curLocation.getLongitude());
 
         Log.d("START POINT : ",curLocation.getLatitude()+"/"+curLocation.getLongitude());
-        Log.d("END POINT : ", String.valueOf(endpoint.getLatitude()+'/'+endpoint.getLongitude()));
+        Log.d("END POINT : ", String.valueOf(endpoint.getLatitude()+"/"+endpoint.getLongitude()));
 
         tMapData.findPathDataWithType(TMapData.TMapPathType.PEDESTRIAN_PATH, startpoint, endpoint,
                 new TMapData.FindPathDataListenerCallback() {
@@ -758,6 +769,8 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
                                 markerOptions.position(position);
                                 markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
                                 googleMap.addMarker(markerOptions).showInfoWindow();
+
+                                pathok = true;
                             }
                         });
                     }
