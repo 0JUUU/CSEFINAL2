@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity{
 
         vpPager.setCurrentItem(1);
 
-
         mContext = this;
     }
 
