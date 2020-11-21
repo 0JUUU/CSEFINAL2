@@ -67,6 +67,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 import com.skt.Tmap.TMapData;
 import com.skt.Tmap.TMapPOIItem;
 import com.skt.Tmap.TMapPoint;
@@ -136,7 +142,7 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
     //snackbar 사용을 위한 view
     private View mLayout;
 
-    private FusedLocationProviderClient fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
+    private FusedLocationProviderClient fusedLocationProviderClient;
     private LocationRequest locationRequest;
 
     private Location location;
@@ -169,7 +175,7 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
     private DatabaseReference myLocationRef;
     private GeoFire geoFire;
     private List<LatLng> dangerousArea;
-    private IOnLoadLocationListener IOlistener;
+    private IOnLoadLocationListener listener_io;
     private LocationCallback geolocationCallback;
 
     // realtime change
@@ -194,11 +200,11 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_main_map, container, false);
 
+        // 팝업창 생성 및 종료
         PopupActivity popupActivity = new PopupActivity(getActivity());
         popupActivity.callFunction();
 
         mLayout = v.findViewById(R.id.layout_map);
-
         activity = (AppCompatActivity) getActivity();
 
         googleApiClient = new GoogleApiClient.Builder(getActivity())
@@ -208,8 +214,7 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
                 .build();
 
 
-       // TTS
-
+        // TTS
         // 검색 버튼 한번 : 음성출력 / 두번 : 검색
         tts = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
             @Override
@@ -226,17 +231,6 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
             @Override
             public void onClick(View v)
             {
-                    /*
-                    text = "목적지를 말씀해주세요.";
-                    Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
-
-                    //http://stackoverflow.com/a/29777304
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        ttsGreater21(text);
-                    } else {
-                        ttsUnder20(text);
-                    }*/
-
                 speechToText();
 
             }
@@ -249,6 +243,7 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
         adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, list_data);
         searchResult_listview.setAdapter(adapter);
 
+        // 검색 버튼 눌렀을 때 실행
         findPath_btn = (Button)v.findViewById(R.id.srch_btn);
 
         findPath_btn.setOnClickListener(new Button.OnClickListener() {
@@ -261,6 +256,8 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
                     tts.speak(findPath_btn.getText().toString(), TextToSpeech.QUEUE_FLUSH, null, null);
                     return;
                 }
+
+                // 두번 눌렀을 때
                 if (System.currentTimeMillis() <= btnPressTime + 1000) {
                     try {
                         FindPOI(destination_text);
@@ -291,6 +288,38 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
 
         mapFragment.getMapAsync(this);
 
+        // 지오코딩
+        Log.d(TAG, "Dexter Start");
+        Dexter.withActivity(getActivity())
+                .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                .withListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse response) {
+                        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+
+                        Log.d(TAG, "buildLocationRequest() start");
+                        buildLocationRequest();
+                        Log.d(TAG, "buildLocationRequest() end");
+                        Log.d(TAG, "buildLocationCallback() start");
+                        buildLocationCallback();
+                        Log.d(TAG, "buildLocationCallback() start");
+
+                        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
+
+                        initArea();
+                        settingGeoFire();
+                    }
+
+                    @Override
+                    public void onPermissionDenied(PermissionDeniedResponse response) {
+                        Toast.makeText(getActivity(), "You must enable permission", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+
+                    }
+                }).check();
 
         return v;
     }
@@ -443,7 +472,7 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
             }
         }
     }
-
+// onMapReady에서 문제 있는 듯함
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
@@ -461,14 +490,7 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
             //2.퍼미션이 있다면
             //3. 위치 업데이트 시작
             startLocationUpdates();
-            // 지오펜싱
-            buildLocationRequest();
-            buildLocationCallback();
 
-            fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
-
-            initArea();
-            settingGeoFire();
             //
             //T map 앱 연동
             tMapTapi = new TMapTapi(getContext());
@@ -535,7 +557,17 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
                 setCurrentLocation(location,markerTitle,markerSnippet);
 
                 curLocation = location;
+
+                if (googleMap != null) {
+
+                    Log.d(TAG, "buildLocationCallback()");
+                    lastLocation = locationResult.getLastLocation();
+
+                    // geofire에 내 위치 저장
+                    addUserMarker();
+                }
             }
+            addCircleArea();
         }
     };
 
@@ -556,7 +588,7 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
                 return;
             }
 
-            Log.d(TAG,"sartLocationUpdates : call fuesedLocationClient.requestLocationUpdates");
+            Log.d(TAG,"startLocationUpdates : call fuesedLocationClient.requestLocationUpdates");
 
             fusedLocationProviderClient.requestLocationUpdates(locationRequest,locationCallback, Looper.myLooper());
 
@@ -574,21 +606,12 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
         }
         super.onStart();
 
-//        Log.d(TAG,"onStart");
-//
-//        if(checkPermission()){
-//            Log.d(TAG,"onStart : call fusedLocationClient.requestLocationUpdates");
-//            fusedLocationProviderClient.requestLocationUpdates(locationRequest,locationCallback,null);
-//
-//            if(googleMap != null)
-//                googleMap.setMyLocationEnabled(true);
-//        }
     }
 
     @Override
     public void onStop() {
         fusedLocationProviderClient.removeLocationUpdates(locationCallback);
-
+        fusedLocationProviderClient.removeLocationUpdates(geolocationCallback);
         if(RequestingLocationUpdates){
             Log.d(TAG,"onStop : call stopLocationUpdates");
             stopLocationUpdates();
@@ -617,6 +640,7 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
     private void setCurrentLocation(Location location, String markerTitle, String markerSnippet) {
         mMoveMapByUser = false;
 
+        Log.d(TAG, "setCurrentLocation()");
         if(currentMarker != null)
             currentMarker.remove();
 
@@ -780,6 +804,7 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(DEFAUT_LOCATION,15);
         googleMap.moveCamera(cameraUpdate);
     }
+
 
     //GPS 활성화를 위한 메소드들
     @TargetApi(Build.VERSION_CODES.M)
@@ -1082,7 +1107,8 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
         myCity = FirebaseDatabase.getInstance()
                 .getReference("RiskFactor");
         Log.d(TAG, "myCity" + myCity);
-        IOlistener = this;
+        listener_io = MapActivity.this;
+        Log.d(TAG, listener_io.toString());
         // Load from Firebase
 
         myCity.addValueEventListener(new ValueEventListener() {
@@ -1100,7 +1126,7 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
                 }
 
                 Log.d("OnDataChange", latLngList.toString());
-                IOlistener.onLoadLocationSuccess(latLngList);
+                listener_io.onLoadLocationSuccess(latLngList);
 
 
             }
@@ -1133,18 +1159,21 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
     }
 
     private void addUserMarker() {
+
+        Log.d(TAG, "addUserMarker()");
+
         geoFire.setLocation("You", new GeoLocation(lastLocation.getLatitude(),
                 lastLocation.getLongitude()), new GeoFire.CompletionListener() {
             @Override
             public void onComplete(String key, DatabaseError error) {
                 if (currentUser != null) currentUser.remove();
-                currentUser = googleMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(lastLocation.getLatitude(),
-                                lastLocation.getLongitude()))
-                        .title("You"));
+                //currentUser = googleMap.addMarker(new MarkerOptions()
+                 //       .position(new LatLng(lastLocation.getLatitude(),
+                 //               lastLocation.getLongitude()))
+                  //      .title("You"));
                 //After add marker, move camera
-                googleMap.animateCamera(CameraUpdateFactory
-                        .newLatLngZoom(currentUser.getPosition(), 120.0f));
+               // googleMap.animateCamera(CameraUpdateFactory
+                       // .newLatLngZoom(, 120.0f));
             }
         });
 
@@ -1160,8 +1189,9 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
         geolocationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(final LocationResult locationResult) {
-                if (googleMap != null) {
-
+                if (googleMap != null)
+                {
+                    Log.d(TAG, "buildLocationCallback()");
                     lastLocation = locationResult.getLastLocation();
 
                     // geofire에 내 위치 저장
@@ -1203,6 +1233,7 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
     // 위험 요소 접근시 말함
     @Override
     public void onKeyEntered(String key, GeoLocation location) {
+        Log.d(TAG, "onKeyEntered : ");
         tts.speak("근처에 위험요소가 있습니다. 주의해주세요.", TextToSpeech.QUEUE_FLUSH, null, null);
         //sendNotification("EDMTDev", String.format("%s entered the dangerous area", key));
     }
@@ -1227,39 +1258,7 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
     public void onGeoQueryError(DatabaseError error) {
         Toast.makeText(getActivity(), "" + error.getMessage(), Toast.LENGTH_SHORT).show();
     }
-/*
-    private void sendNotification(String title, String content) {
 
-        Toast.makeText(getActivity(), "" + content, Toast.LENGTH_SHORT).show();
-        String NOTIFICATION_CHANNEL_ID = "emdt_multiple_location";
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-        {
-            NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "My Notification",
-                    NotificationManager.IMPORTANCE_DEFAULT);
-
-            // Config
-            notificationChannel.setDescription("Channel description");
-            notificationChannel.enableLights(true);
-            notificationChannel.setLightColor(Color.RED);
-            notificationChannel.setVibrationPattern(new long[]{0,1000,500,1000});
-            notificationChannel.enableVibration(true);
-            notificationManager.createNotificationChannel(notificationChannel);
-        }
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), NOTIFICATION_CHANNEL_ID);
-        builder.setContentTitle(title)
-                .setContentText(content)
-                .setAutoCancel(false)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
-
-        Notification notification = builder.build();
-        notificationManager.notify(new Random().nextInt(), notification);
-
-    }
-*/
     @Override
     public void onLoadLocationSuccess(List<MyLatLng> latLngs) {
         dangerousArea = new ArrayList<>();
@@ -1268,24 +1267,32 @@ public class MapActivity extends Fragment implements OnMapReadyCallback,
         {
             LatLng convert = new LatLng(myLatLng.getLatitude(), myLatLng.getLongitude());
             dangerousArea.add(convert);
-            Log.d("dangerous : ", dangerousArea.toString());
-        }
 
+        }
+        Log.d("dangerous : ", dangerousArea.toString());
         // New, after dangerous Area is have data, we will call MAp display
-        SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
 
         // clear map and add again
         if(googleMap != null)
         {
 
-            googleMap.clear();;
-            // Add user Marker
-            addUserMarker();
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    googleMap.clear();
+                    Log.d(TAG, "onLoadLocationSuccess() : before addUserMarker()");
+                    // Add user Marker
+                    lastLocation = location;
+                    Log.d(TAG, "lastLocation : " + lastLocation.getLatitude() + lastLocation.getLongitude());
+                    addUserMarker();
 
-            // Add Circle of dangerous area
-            addCircleArea();
+                    Log.d(TAG, "onLoadLocationSuccess() : after addUserMarker()");
+
+                    // Add Circle of dangerous area
+                    addCircleArea();
+                }
+            });
+
         }
     }
 
